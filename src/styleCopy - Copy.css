@@ -145,5 +145,14 @@ img {
   margin: 70px 0;
 }
 .author-name {
+  display: block;
+  margin: 0 auto;
   color: white;
+  position: relative;
+  z-index: 20;
+  left: 25px;
+  top: 20px;
+}
+.margin {
+  margin: 50px;
 }
