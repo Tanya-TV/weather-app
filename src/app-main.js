@@ -54,7 +54,7 @@ form.addEventListener("submit", showCity);
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
   let h2 = document.querySelector("h2");
-  h2.innerHTML = `${temperature}°C`;
+  h2.innerHTML = `${temperature}°C|°F`;
 
   let precipitation = Math.round(response.data.main.humidity);
   let precip = document.querySelector("#precip");
