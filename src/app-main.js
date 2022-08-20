@@ -52,6 +52,7 @@ let form = document.querySelector("#form");
 form.addEventListener("submit", showCity);
 
 function showTemperature(response) {
+  console.log(response.data);
   let temperature = Math.round(response.data.main.temp);
   let h2 = document.querySelector("h2");
   h2.innerHTML = `${temperature}°C|°F`;
@@ -63,6 +64,12 @@ function showTemperature(response) {
   let wind = Math.round(response.data.wind.speed);
   let windSpeed = document.querySelector("#wind");
   windSpeed.innerHTML = `${wind} km/h`;
+
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    ` http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 
 let city = "Kyiv";
