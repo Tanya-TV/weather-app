@@ -55,7 +55,7 @@ function showTemperature(response) {
   console.log(response.data);
   let temperature = Math.round(response.data.main.temp);
   let h2 = document.querySelector("h2");
-  h2.innerHTML = `${temperature}°C|°F`;
+  h2.innerHTML = temperature;
 
   let precipitation = Math.round(response.data.main.humidity);
   let precip = document.querySelector("#precip");
