@@ -51,6 +51,14 @@ function showCity(event) {
 let form = document.querySelector("#form");
 form.addEventListener("submit", showCity);
 
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let day = date.getDay();
+  return `${day} ${hours}:${minutes}`;
+}
+
 function showTemperature(response) {
   console.log(response.data);
   let temperature = Math.round(response.data.main.temp);
@@ -73,6 +81,9 @@ function showTemperature(response) {
 
   let description = document.querySelector("#description");
   description.innerHTML = response.data.weather[0].description;
+
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
 }
 
 let city = "Kyiv";
