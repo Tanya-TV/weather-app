@@ -166,3 +166,19 @@ img {
   right: -75px;
   color: rgb(108, 117, 125);
 }
+.description:first-letter {
+  text-transform: capitalize;
+}
+.units-f {
+  text-decoration: none;
+}
+
+.units-c {
+  text-decoration: none;
+}
+
+.active {
+  text-decoration: none;
+  color: rgb(108, 117, 125);
+  cursor: default;
+}

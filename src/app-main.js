@@ -51,6 +51,7 @@ function showCity(event) {
 let form = document.querySelector("#form");
 form.addEventListener("submit", showCity);
 
+//works on current date(может удалю)
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -73,18 +74,54 @@ function showTemperature(response) {
   let windSpeed = document.querySelector("#wind");
   windSpeed.innerHTML = `${wind} km/h`;
 
+  celsiusTemperature = response.data.main.temp;
+
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
     ` http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 
   let description = document.querySelector("#description");
   description.innerHTML = response.data.weather[0].description;
 
+  //works on current date (может удалю)
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
 }
+
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+
+  let temperatureElement = document.querySelector("h2");
+  //remove the active class the celsius link
+  celsiusLink.classList.remove("active");
+
+  fahrenheitLink.classList.add("active");
+
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+
+  celsiusLink.classList.add("active");
+
+  fahrenheitLink.classList.remove("active");
+
+  let temperatureElement = document.querySelector("h2");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 let city = "Kyiv";
 let apiKey = "3f7457282d9e42883d63642e2c0fa1a0";
