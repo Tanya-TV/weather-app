@@ -62,6 +62,26 @@ function formatDate(timestamp) {
 
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
+  let days = ["Thu", "Fri", "Sat"];
+
+  let forecastHTML = `<div class="col">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+                <div class="fri">
+                  ${day}
+                  <small> 14.07.2022 </small>
+                  <br />
+                  <span class="icon-small">
+                    <img src="media/sun-cloud.png" alt="sun-cloud"  class="sun-cloud" />
+                  </span>
+                  <span class="degree"> 20°C</span>
+                </div>
+                `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
@@ -141,3 +161,5 @@ let apiKey = "3f7457282d9e42883d63642e2c0fa1a0";
 
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(showTemperature);
+
+displayForecast();
