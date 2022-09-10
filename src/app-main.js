@@ -60,33 +60,47 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function displayForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let days = ["Thu", "Fri", "Sat"];
 
   let forecastHTML = `<div class="col">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 3) {
+      forecastHTML =
+        forecastHTML +
+        `
                 <div class="fri">
-                  ${day}
+                  ${formatDay(forecastDay.dt)}
                   <small> 14.07.2022 </small>
                   <br />
                   <span class="icon-small">
-                    <img src="media/sun-cloud.png" alt="sun-cloud"  class="sun-cloud" />
+                    <img src="http://openweathermap.org/img/wn/${
+                      forecastDay.weather[0].icon
+                    }@2x.png" alt="sun-cloud"  class="sun-cloud" />
                   </span>
-                  <span class="degree"> 20°C</span>
+                  <span class="degree"> ${Math.round(forecastDay.temp)}°C</span>
                 </div>
                 `;
+    }
   });
+
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
   let apiKey = "3f7457282d9e42883d63642e2c0fa1a0";
-  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayForecast);
 }
@@ -118,8 +132,8 @@ function showTemperature(response) {
   description.innerHTML = response.data.weather[0].description;
 
   //works on current date (может удалю)
-  let dateElement = document.querySelector("#date");
-  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  //let dateElement = document.querySelector("#date");
+  //dateElement.innerHTML = formatDate(response.data.dt * 1000);
 
   getForecast(response.data.coord);
 }
@@ -162,4 +176,4 @@ let apiKey = "3f7457282d9e42883d63642e2c0fa1a0";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(showTemperature);
 
-displayForecast();
+//displayForecast();
