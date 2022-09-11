@@ -39,9 +39,12 @@ function showCity(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-input");
   let searchingCity = document.querySelector("#searching-city");
-  searchingCity.innerHTML = `${searchInput.value}`;
+  searchingCity.innerHTML = `${
+    searchInput.value.charAt(0).toUpperCase() + searchInput.value.slice(1)
+  }`;
 
   let city = searchingCity.innerHTML;
+  //city = city.charAt(0);
   let apiKey = "3f7457282d9e42883d63642e2c0fa1a0";
 
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
