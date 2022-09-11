@@ -31,7 +31,9 @@ p {
   font-size: 14px;
 }
 small {
-  font-size: 12px;
+  font-size: 18px;
+  position: relative;
+  bottom: 9px;
 }
 img {
   position: relative;
@@ -127,10 +129,10 @@ img {
   position: relative;
   top: 2px;
   font-size: 30px;
-  -webkit-text-stroke: 0.1px rgb(255, 255, 255);
+  -webkit-text-stroke: 0.1px rgb(225, 104, 104);
 }
 .icon-small {
-  font-size: 10px;
+  font-size: 20px;
 }
 
 .sun-sticker {
@@ -181,4 +183,8 @@ img {
   text-decoration: none;
   color: rgb(108, 117, 125);
   cursor: default;
+}
+
+.fri {
+  margin-bottom: 20px;
 }

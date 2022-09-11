@@ -75,20 +75,22 @@ function displayForecast(response) {
 
   let forecastHTML = `<div class="col">`;
   forecast.forEach(function (forecastDay, index) {
-    if (index < 3) {
+    if (index > 0 && index < 4) {
       forecastHTML =
         forecastHTML +
         `
                 <div class="fri">
                   ${formatDay(forecastDay.dt)}
-                  <small> 14.07.2022 </small>
+                   
                   <br />
                   <span class="icon-small">
                     <img src="http://openweathermap.org/img/wn/${
                       forecastDay.weather[0].icon
                     }@2x.png" alt="sun-cloud"  class="sun-cloud" />
                   </span>
-                  <span class="degree"> ${Math.round(forecastDay.temp)}°C</span>
+                  <span class="degree"> ${Math.round(
+                    forecastDay.temp.day
+                  )}<small> °C </small> </span>
                 </div>
                 `;
     }
